@@ -524,6 +524,7 @@ resource "azurerm_network_interface" "3tNICD" {
         subnet_id                     = "${element(azurerm_subnet.3tSubnet-Data.*.id, 2)}"
         private_ip_address_allocation = "Dynamic"
         public_ip_address_id          = "${element(azurerm_public_ip.3tPIP.*.id, 3)}"
+        load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.Azure-LB-AP.id}"]
     }
 
     tags {
@@ -613,6 +614,57 @@ resource "azurerm_virtual_machine" "3tVM-Apps" {
         environment = "Dev"
         type        = "${element(var.type, 1)}"
     }
+}
+
+#Load balancer public IP
+resource "azurerm_public_ip" "lbPIP" {
+    name                         = "lbPIP"
+    location                     = "eastasia"
+    resource_group_name          = "${azurerm_resource_group.3tResourceGroup.name}"
+    allocation_method            = "Dynamic"
+
+    tags {
+        environment = "Terraform Demo"
+    }
+}
+
+#Load balancer
+resource "azurerm_lb" "Azure-LB" {
+  name                = "Azure-LB"
+  location            = "eastasia"
+  resource_group_name = "${azurerm_resource_group.3tResourceGroup.name}"
+
+  frontend_ip_configuration {
+    name                 = "Azure-LB-PIP"
+    public_ip_address_id = "${azurerm_public_ip.lbPIP.id}"
+  }
+}
+
+#Load balancer backend adress Pool
+resource "azurerm_lb_backend_address_pool" "Azure-LB-AP" {
+  resource_group_name = "${azurerm_resource_group.3tResourceGroup.name}"
+  loadbalancer_id     = "${azurerm_lb.Azure-LB.id}"
+  name                = "BackEndAddressPool"
+}
+
+#Load balancer rule
+resource "azurerm_lb_rule" "Azure-LB-Rule" {
+  resource_group_name            = "${azurerm_resource_group.3tResourceGroup.name}"
+  loadbalancer_id                = "${azurerm_lb.Azure-LB.id}"
+  name                           = "LBRule"
+  protocol                       = "Tcp"
+  frontend_port                  = 3389
+  backend_port                   = 3389
+  frontend_ip_configuration_name = "Azure-LB-PIP"
+  backend_address_pool_id        = "${azurerm_lb_backend_address_pool.Azure-LB-AP.id}"
+}
+
+#Load balancer availability set
+resource "azurerm_availability_set" "Azure-AS" {
+  name                = "Azure-AS"
+  location            = "eastasia"
+  resource_group_name = "${azurerm_resource_group.3tResourceGroup.name}"
+  managed             = "true"
 }
 
 #Data VM
