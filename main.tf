@@ -484,6 +484,7 @@ resource "azurerm_network_interface" "3tNICT" {
         subnet_id                     = "${element(azurerm_subnet.3tSubnet-Tech.*.id, 0)}"
         private_ip_address_allocation = "Dynamic"
         public_ip_address_id          = "${element(azurerm_public_ip.3tPIP.*.id, count.index)}"
+        load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.Azure-LB-AP.id}"]
     }
 
     tags {
@@ -524,7 +525,6 @@ resource "azurerm_network_interface" "3tNICD" {
         subnet_id                     = "${element(azurerm_subnet.3tSubnet-Data.*.id, 2)}"
         private_ip_address_allocation = "Dynamic"
         public_ip_address_id          = "${element(azurerm_public_ip.3tPIP.*.id, 3)}"
-        load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.Azure-LB-AP.id}"]
     }
 
     tags {
