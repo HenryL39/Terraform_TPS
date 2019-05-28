@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+spec:
+  tls:
+  - hosts:
+    - nginx.henry.com
+    secretName: nginx-henry
+  rules:
+  - host: nginx.henry.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: my-nginx
+          servicePort: 80
