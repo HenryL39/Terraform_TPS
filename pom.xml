@@ -97,6 +97,7 @@
 						<goal>tag</goal>
 					</goals>
 					<configuration>
+						<baseImage>java</baseImage>
 						<image>cloud:${project.version}</image>
 						<newName>henryl39/cloud:${project.version}</newName>
 					</configuration>
