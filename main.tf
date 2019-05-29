@@ -245,7 +245,7 @@ resource "google_container_node_pool" "primary_stateless_nodes2" {
 #Machine contenant le client Kubectl
 resource "google_compute_instance" "kub" {
   name         = "kub"
-  machine_type = "f1-micro"
+  machine_type = "n1-standard-1"
 
   boot_disk {
     initialize_params {
@@ -269,7 +269,7 @@ resource "google_compute_instance" "kub" {
 #Machine Nexus
 resource "google_compute_instance" "nexus" {
   name         = "nexus"
-  machine_type = "f1-micro"
+  machine_type = "n1-standard-1"
 
   boot_disk {
     initialize_params {
@@ -293,7 +293,7 @@ resource "google_compute_instance" "nexus" {
 #Machine Jenkins
 resource "google_compute_instance" "jenkins" {
   name         = "jenkins"
-  machine_type = "f1-micro"
+  machine_type = "n1-standard-1"
 
   boot_disk {
     initialize_params {
@@ -317,7 +317,7 @@ resource "google_compute_instance" "jenkins" {
 #Machine Docker
 resource "google_compute_instance" "docker" {
   name         = "docker"
-  machine_type = "f1-micro"
+  machine_type = "n1-standard-1"
 
   boot_disk {
     initialize_params {
