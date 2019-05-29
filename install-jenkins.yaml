@@ -30,16 +30,19 @@
   - name: install maven
     yum: name=maven state=present
 
-  # - name: install Jenkins CLI
-  #   get_url: url=http://localhost:8080/jnlpJars/jenkins-cli.jar
+  - name: install Jenkins CLI
+    get_url: url=http://localhost:8080/jnlpJars/jenkins-cli.jar
 
-  # - name: Login to Jenkins using base password
-  #   shell: java -jar jenkins-cli.jar -s http://localhost:8080 who-am-i -username admin -password `sudo cat /var/jenkins/secrets/initialAdminPassword`
+  - name: Login to Jenkins using base password
+    shell: java -jar jenkins-cli.jar -s http://localhost:8080 who-am-i -username admin -password `sudo cat /var/lib/jenkins/secrets/initialAdminPassword`
 
-  # - name: put jenkins ssh key into Jenkins server
-  #   copy:
-  #     src: .ssh
-  #     dest: /var/jenkins/
+  - name: put jenkins ssh key into Jenkins server
+    copy:
+      src: .ssh
+      dest: /var/lib/jenkins/
+
+  - name: Change permissions of .ssh directory
+    shell: sudo chmod 644 /var/lib/jenkins/.ssh/id_rsa.pub ; sudo chmod 600 /var/lib/jenkins/.ssh/id_rsa
 
   - name: Download Jenkins base plugins
     shell: java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin {{item}}
@@ -65,8 +68,5 @@
       - Email Extension
       - Mailer
 
-  # - name: create Jenkins job from configuration
-  #   shell: java -jar jenkins-cli.jar -s http://localhost:8080/ create-job Project_Pipeline < new_job_name.xml
-
-
-  # - name: create Jenkins credentials for Github
+  - name: create Jenkins job from configuration
+    shell: java -jar jenkins-cli.jar -s http://localhost:8080/ create-job Project_Pipeline < config.xml
