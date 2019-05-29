@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.wunderit</groupId>
 	<artifactId>projetcd</artifactId>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>projetcd</name>
 	<description>Application for CD Project</description>
 	<packaging>war</packaging>
@@ -23,7 +23,7 @@
 		<connection>scm:git:git@github.com:HenryL39/Terraform_TPS.git</connection>
 		<!-- <developerConnection>scm:git:ssh://rsnip@github.com/HenryL39/ProjetCD.git</developerConnection> -->
 		<url>http://github.com/HenryL39/Terraform_TPS</url>
-		<tag>projetcd-1.0</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<dependencies>
