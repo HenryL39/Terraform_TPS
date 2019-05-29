@@ -1,0 +1,25 @@
+- name: Install Jenkins
+  hosts: jenkins-server
+  become: True
+  become_method: sudo
+  tasks:
+  - name: install Java
+    yum: name=java-1.8.0-openjdk-devel state=present
+
+  - name: get Jenkins repository
+    get_url: url=http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo dest=/etc/yum.repos.d/jenkins.repo
+
+  - name: add Jenkins repo to system
+    shell: rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+
+  - name: install Jenkins
+    yum: name=jenkins state=present
+
+  - name: enable Jenkins
+    service: name=jenkins state=started enabled=yes
+
+  - name: ensure firewalld is running
+    service: name=firewalld state=started
+
+  - name: insert firewalld rule for Jenkins http port
+    firewalld: port=8080/tcp permanent=true state=enabled immediate=yes
