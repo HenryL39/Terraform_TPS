@@ -1,4 +1,4 @@
 .terraform
-*.tfstate
-*.tfsate.backup
+terraform.tfstate
+terraform.tfsate.backup
 .ssh
