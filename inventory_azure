@@ -3,7 +3,7 @@
 
 # Jenkins
 [jenkins-server]
-35.209.185.13
+35.222.185.13
 
 # Nexus
 [nexus-server]

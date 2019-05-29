@@ -82,12 +82,12 @@
 	<distributionManagement>
 	   	<snapshotRepository>
 	      <id>nexus</id>
-	      <url>http://10.2.0.5:8081/repository/maven-snapshots/</url>
+	      <url>http://10.2.0.7:8081/repository/maven-snapshots/</url>
 	  	 </snapshotRepository>
 	   	<repository>
 			<id>nexus</id>
 			<name>devops-app-01-releases</name>
-			<url>http://10.2.0.5:8081/repository/maven-releases/</url>
+			<url>http://10.2.0.7:8081/repository/maven-releases/</url>
     	</repository>
 </distributionManagement>
 
