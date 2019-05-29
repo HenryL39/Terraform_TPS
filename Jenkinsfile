@@ -1,11 +1,11 @@
 pipeline{
     agent{
-        label "docker-slave"
+        any
     }
     stages{
         stage("Pull"){
             steps{
-                git branch: 'source', credentialsId: '8ce10fc1-e7b8-4a1b-bb26-d494fe5214ea', url: 'https://github.com/HenryL39/ProjetCD.git'
+                git branch: 'projet_terra', credentialsId: 'git_henry', url: 'https://github.com/HenryL39/Terraform_TPS.git'
             }
         }
         stage("Container"){

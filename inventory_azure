@@ -3,15 +3,11 @@
 
 # Jenkins
 [jenkins-server]
-52.143.158.176
+35.209.180.230
 
 # Nexus
 [nexus-server]
-52.143.164.50
-
-# Docker
-[docker-server]
-20.188.35.124
+35.222.185.13 
 
 # Variables that will be applied to all servers
 [all:vars]
