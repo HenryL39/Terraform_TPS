@@ -6,15 +6,4 @@
       <password>admin123</password>
     </server>
   </servers>
-  <servers>
-    <server>
-      <id>docker-hub</id>
-      <username>henryl39</username>
-      <password>{5uRgoEtEN5MH23Byb35dhavfwUGHp0tb2CHyzHHALOA=}</password>
-      <configuration>
-        <email>henry.lechine@gmail.com</email>
-      </configuration>
-    </server>
-  </servers>
-
 </settings>
